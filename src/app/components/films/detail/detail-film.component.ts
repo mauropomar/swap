@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { FilmsService } from '../../../services/films';
 import { FilmsModel } from '../../../models/films';
 
@@ -10,7 +10,7 @@ import { FilmsModel } from '../../../models/films';
 })
 export class DetailFilmComponent implements OnInit {
   film: FilmsModel;
-  constructor(private filmService: FilmsService, private activatedRoute: ActivatedRoute) {}
+  constructor(private filmService: FilmsService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -22,6 +22,10 @@ export class DetailFilmComponent implements OnInit {
     this.filmService.get(id).subscribe((data: any) => {
       this.film = data;
     });
+  }
+
+  goBack(){
+    this.router.navigate(['films']);
   }
 
 }
