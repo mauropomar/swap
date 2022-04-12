@@ -13,7 +13,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/films/films.module').then((m) => m.FilmsModule),
   }
-
 ];
 
 @NgModule({
