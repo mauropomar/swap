@@ -13,4 +13,8 @@ export class FilmsService {
   getAll(){
     return this.http.get<FilmsModel[]>(`https://swapi.dev/api/films`);
   }
+
+  get(id: string){
+    return this.http.get<FilmsModel[]>(`https://swapi.dev/api/films/`+id);
+  }
 }
