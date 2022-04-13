@@ -60,5 +60,21 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
         item.director.toLocaleLowerCase().indexOf(text) > -1
     );
     this.isEmpty = this.films.length === 0;
+    if (this.films.length > 0 && text !== '') {
+      debugger
+      let search = localStorage.getItem('search');
+      let searchArray = search !== null ? JSON.parse(search): [];
+      const obj = {
+        text: text,
+        route: 'films',
+      };
+      if (search) {
+        searchArray.push(obj);
+      } else {
+        searchArray.push(obj);
+      }
+      localStorage.setItem('search', JSON.stringify(searchArray));
+      this.filterService.reloadSearch();
+    }
   }
 }

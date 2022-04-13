@@ -7,10 +7,15 @@ import { Subject } from 'rxjs';
 })
 export class FilterService {
   public filterSubject = new Subject<string>();
+  public SearchSubject = new Subject<string[]>();
   constructor() { }
 
   setFilterText(value: string): void {
     this.filterSubject.next(value);
+  }
+
+  reloadSearch(){
+    this.SearchSubject.next();
   }
 
 }
