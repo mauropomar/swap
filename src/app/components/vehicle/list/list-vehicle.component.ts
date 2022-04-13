@@ -6,14 +6,17 @@ import { FilterService } from '../../../services/filter';
 @Component({
   selector: 'app-list-vehicle',
   templateUrl: './list-vehicle.component.html',
-  styleUrls: ['./list-vehicle.component.css']
+  styleUrls: ['./list-vehicle.component.css'],
 })
 export class ListVehicleComponent implements OnInit, OnDestroy {
   vehicles = [];
   isEmpty: boolean = false;
   public sucription: Subscription;
 
-  constructor(private vehicleService: VehicleService,  private filterService: FilterService) {
+  constructor(
+    private vehicleService: VehicleService,
+    private filterService: FilterService
+  ) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
       const url = window.location.href.split('/');
       if (url[3] === 'vehicles') {
@@ -33,15 +36,15 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
   getAll(): void {
     this.vehicleService.getAll().subscribe((data) => {
       const results = data.results;
-      for(const item of results){
-         item.id = this.getId(item.url);
-         this.vehicles.push(item);
+      for (const item of results) {
+        item.id = this.getId(item.url);
+        this.vehicles.push(item);
       }
       localStorage.setItem('items', JSON.stringify(this.vehicles));
     });
   }
 
-  getId(url:string): string{
+  getId(url: string): string {
     const array = url.split('/');
     const id = array[5];
     return id;
@@ -63,7 +66,7 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
       let searchArray = search !== null ? JSON.parse(search) : [];
       const obj = {
         text: text,
-        route:'vehicles',
+        route: 'vehicles',
       };
       searchArray.push(obj);
       localStorage.setItem('search', JSON.stringify(searchArray));
