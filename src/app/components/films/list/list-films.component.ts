@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
 import { FilmsService } from '../../../services/films';
 import { FilmsModel } from '../../../models/films';
 
@@ -17,7 +18,13 @@ export class ListFilmsComponent implements OnInit {
 
   getAll() {
     this.filmService.getAll().subscribe((data: any) => {
-      this.films = data.results;
+      const results = data.results;
+      let i = 1;
+      for(const item of results){
+         item.id = i;
+         this.films.push(item);
+         i++;
+      }
     });
   }
 }

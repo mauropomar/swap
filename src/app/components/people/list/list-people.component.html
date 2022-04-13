@@ -1,0 +1,5 @@
+<div class="card">
+  <div *ngFor="let item of peoples" class="item-card">
+    <p>{{item.name}}/{{item.gender}}/{{item.birth_year}} <a [routerLink] = "['/peoples', item.id]">More Details</a></p>
+  </div>
+</div>
