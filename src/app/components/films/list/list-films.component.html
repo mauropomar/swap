@@ -2,4 +2,5 @@
   <div *ngFor="let item of films" class="item-card">
     <p>{{item.title}}/{{item.director}}/{{item.release_date}} <a [routerLink] = "['/films', item.id]">More Details</a></p>
   </div>
+  <p *ngIf="isEmpty">No existe filmes para este criterio de búsqueda</p>
 </div>
