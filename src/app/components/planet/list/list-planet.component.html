@@ -1,0 +1,5 @@
+<div class="card">
+  <div *ngFor="let item of planets" class="item-card">
+    <p>{{item.name}}/{{item.climate}}/{{item.gravity}} <a [routerLink] = "['/planets', item.id]">More Details</a></p>
+  </div>
+</div>

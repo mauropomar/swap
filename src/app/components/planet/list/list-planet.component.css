@@ -1,0 +1,13 @@
+.card{
+  margin:10px;
+}
+
+.item-card{
+  padding: 10px;
+  font-weight: bold;
+}
+
+.item-card a{
+  padding-left: 10px;
+  font-weight: 300;
+}

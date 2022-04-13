@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'peoples',
     loadChildren: () =>
       import('./components/people/people.module').then((m) => m.PeopleModule),
+  },
+  {
+    path: 'planets',
+    loadChildren: () =>
+      import('./components/planet/planet.module').then((m) => m.PlanetModule),
   }
 ];
 
