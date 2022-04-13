@@ -32,6 +32,11 @@ const routes: Routes = [
     path: 'vehicles',
     loadChildren: () =>
       import('./components/vehicle/vehicle.module').then((m) => m.VehicleModule)
+  },
+  {
+    path: 'starships',
+    loadChildren: () =>
+      import('./components/starship/starship.module').then((m) => m.StarshipModule)
   }
 ];
 
