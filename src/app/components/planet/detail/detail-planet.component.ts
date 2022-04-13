@@ -24,7 +24,7 @@ export class DetailPlanetComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack(): void{
     this.router.navigate(['planets']);
   }
 }

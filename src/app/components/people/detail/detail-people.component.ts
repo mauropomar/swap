@@ -26,7 +26,7 @@ export class DetailPeopleComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack(): void{
     this.router.navigate(['peoples']);
   }
 

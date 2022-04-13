@@ -24,7 +24,7 @@ export class DetailSpecieComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack(): void{
     this.router.navigate(['species']);
   }
 }

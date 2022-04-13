@@ -24,7 +24,7 @@ export class DetailStarshipComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack(): void{
     this.router.navigate(['starships']);
   }
 }

@@ -24,7 +24,7 @@ export class DetailFilmComponent implements OnInit {
     });
   }
 
-  goBack(){
+  goBack(): void{
     this.router.navigate(['films']);
   }
 
