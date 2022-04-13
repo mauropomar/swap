@@ -1,0 +1,13 @@
+.card{
+  margin:10px;
+}
+
+.card span{
+  padding-left:10px;
+  font-weight: bold;
+}
+
+.btn-back{
+   text-align: end;
+   margin-right: 10px;
+}

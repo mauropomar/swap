@@ -1,0 +1,5 @@
+<div class="card">
+  <div *ngFor="let item of vehicles" class="item-card">
+    <p>{{item.name}}/{{item.model}}/{{item.manufacturer}} <a [routerLink] = "['/vehicles', item.id]">More Details</a></p>
+  </div>
+</div>

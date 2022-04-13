@@ -18,12 +18,16 @@ export class ListPlanetComponent implements OnInit {
   getAll() {
     this.Planetervice.getAll().subscribe((data: any) => {
       const results = data.results;
-      let i = 1;
       for(const item of results){
-         item.id = i;
+         item.id = this.getId(item.url);
          this.planets.push(item);
-         i++;
       }
     });
+  }
+
+  getId(url:string){
+    const array = url.split('/');
+    const id = array[5];
+    return id;
   }
 }

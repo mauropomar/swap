@@ -18,12 +18,16 @@ export class ListSpecieComponent implements OnInit {
   getAll() {
     this.specieService.getAll().subscribe((data: any) => {
       const results = data.results;
-      let i = 1;
       for(const item of results){
-         item.id = i;
+         item.id = this.getId(item.url);
          this.species.push(item);
-         i++;
       }
     });
+  }
+
+  getId(url:string){
+    const array = url.split('/');
+    const id = array[5];
+    return id;
   }
 }
