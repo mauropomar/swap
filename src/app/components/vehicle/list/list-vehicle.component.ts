@@ -26,28 +26,28 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
     this.getAll();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sucription.unsubscribe();
   }
 
-  getAll() {
+  getAll(): void {
     this.vehicleService.getAll().subscribe((data: any) => {
       const results = data.results;
       for(const item of results){
          item.id = this.getId(item.url);
          this.vehicles.push(item);
-         localStorage.setItem('items', JSON.stringify(this.vehicles));
       }
+      localStorage.setItem('items', JSON.stringify(this.vehicles));
     });
   }
 
-  getId(url:string){
+  getId(url:string): string{
     const array = url.split('/');
     const id = array[5];
     return id;
   }
 
-  filter(text: string) {
+  filter(text: string): void {
     let array: any = localStorage.getItem('items');
     array = JSON.parse(array);
     text = text !== '' ? text.toLocaleLowerCase() : '';
@@ -58,5 +58,16 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
         item.manufacturer.toLocaleLowerCase().indexOf(text) > -1
     );
     this.isEmpty = this.vehicles.length === 0;
+    if (this.vehicles.length > 0 && text !== '') {
+      let search = localStorage.getItem('search');
+      let searchArray = search !== null ? JSON.parse(search) : [];
+      const obj = {
+        text: text,
+        route:'vehicles',
+      };
+      searchArray.push(obj);
+      localStorage.setItem('search', JSON.stringify(searchArray));
+      this.filterService.reloadSearch();
+    }
   }
 }

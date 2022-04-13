@@ -29,28 +29,28 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
     this.getAll();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sucription.unsubscribe();
   }
 
-  getAll() {
+  getAll(): void {
     this.filmService.getAll().subscribe((data: any) => {
       const results = data.results;
       for (const item of results) {
         item.id = this.getId(item.url);
         this.films.push(item);
-        localStorage.setItem('items', JSON.stringify(this.films));
       }
+      localStorage.setItem('items', JSON.stringify(this.films));
     });
   }
 
-  getId(url: string) {
+  getId(url: string): string {
     const array = url.split('/');
     const id = array[5];
     return id;
   }
 
-  filter(text: string) {
+  filter(text: string): void {
     let array: any = localStorage.getItem('items');
     array = JSON.parse(array);
     text = text !== '' ? text.toLocaleLowerCase() : '';
@@ -61,18 +61,13 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
     );
     this.isEmpty = this.films.length === 0;
     if (this.films.length > 0 && text !== '') {
-      debugger
       let search = localStorage.getItem('search');
-      let searchArray = search !== null ? JSON.parse(search): [];
+      let searchArray = search !== null ? JSON.parse(search) : [];
       const obj = {
         text: text,
         route: 'films',
       };
-      if (search) {
-        searchArray.push(obj);
-      } else {
-        searchArray.push(obj);
-      }
+      searchArray.push(obj);
       localStorage.setItem('search', JSON.stringify(searchArray));
       this.filterService.reloadSearch();
     }

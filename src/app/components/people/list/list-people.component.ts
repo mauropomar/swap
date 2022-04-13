@@ -26,37 +26,48 @@ export class ListPeopleComponent implements OnInit, OnDestroy {
     this.getAll();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sucription.unsubscribe();
   }
 
-  getAll() {
+  getAll():void {
     this.peopleService.getAll().subscribe((data: any) => {
       const results = data.results;
       for(const item of results){
          item.id = this.getId(item.url);
          this.peoples.push(item);
-         localStorage.setItem('items', JSON.stringify(this.peoples));
       }
+      localStorage.setItem('items', JSON.stringify(this.peoples));
     });
   }
 
-  getId(url:string){
+  getId(url:string): string{
     const array = url.split('/');
     const id = array[5];
     return id;
   }
 
-  filter(text: string) {
+  filter(text: string): void {
     let array: any = localStorage.getItem('items');
     array = JSON.parse(array);
     text = text !== '' ? text.toLocaleLowerCase() : '';
     this.peoples = array.filter(
       (item: any) =>
         item.name.toLocaleLowerCase().indexOf(text) > -1 ||
-        item.gender.toLocaleLowerCase().indexOf(text) > -1
+        item.birth_year.toLocaleLowerCase().indexOf(text) > -1
     );
     this.isEmpty = this.peoples.length === 0;
+    if (this.peoples.length > 0 && text !== '') {
+      let search = localStorage.getItem('search');
+      let searchArray = search !== null ? JSON.parse(search) : [];
+      const obj = {
+        text: text,
+        route: 'peoples',
+      };
+      searchArray.push(obj);
+      localStorage.setItem('search', JSON.stringify(searchArray));
+      this.filterService.reloadSearch();
+    }
   }
 
 }

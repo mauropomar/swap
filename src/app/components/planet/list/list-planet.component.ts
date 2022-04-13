@@ -32,8 +32,8 @@ export class ListPlanetComponent implements OnInit {
       for(const item of results){
          item.id = this.getId(item.url);
          this.planets.push(item);
-         localStorage.setItem('items', JSON.stringify(this.planets));
       }
+      localStorage.setItem('items', JSON.stringify(this.planets));
     });
   }
 
@@ -54,5 +54,16 @@ export class ListPlanetComponent implements OnInit {
         item.gravity.toLocaleLowerCase().indexOf(text) > -1
     );
     this.isEmpty = this.planets.length === 0;
+    if (this.planets.length > 0 && text !== '') {
+      let search = localStorage.getItem('search');
+      let searchArray = search !== null ? JSON.parse(search) : [];
+      const obj = {
+        text: text,
+        route: 'planets',
+      };
+      searchArray.push(obj);
+      localStorage.setItem('search', JSON.stringify(searchArray));
+      this.filterService.reloadSearch();
+    }
   }
 }

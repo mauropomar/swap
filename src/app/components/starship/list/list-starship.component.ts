@@ -59,5 +59,16 @@ export class ListStarshipComponent implements OnInit, OnDestroy {
         item.starship_class.toLocaleLowerCase().indexOf(text) > -1
     );
     this.isEmpty = this.ships.length === 0;
+    if (this.ships.length > 0 && text !== '') {
+      let search = localStorage.getItem('search');
+      let searchArray = search !== null ? JSON.parse(search) : [];
+      const obj = {
+        text: text,
+        route: 'starships',
+      };
+      searchArray.push(obj);
+      localStorage.setItem('search', JSON.stringify(searchArray));
+      this.filterService.reloadSearch();
+    }
   }
 }
