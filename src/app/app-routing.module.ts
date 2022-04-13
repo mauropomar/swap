@@ -22,6 +22,11 @@ const routes: Routes = [
     path: 'planets',
     loadChildren: () =>
       import('./components/planet/planet.module').then((m) => m.PlanetModule),
+  },
+  {
+    path: 'species',
+    loadChildren: () =>
+      import('./components/specie/specie.module').then((m) => m.SpecieModule)
   }
 ];
 
