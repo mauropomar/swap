@@ -2,4 +2,5 @@
   <div *ngFor="let item of planets" class="item-card">
     <p>{{item.name}}/{{item.climate}}/{{item.gravity}} <a [routerLink] = "['/planets', item.id]">More Details</a></p>
   </div>
+  <p *ngIf="isEmpty">No existen planetas para este criterio de búsqueda</p>
 </div>

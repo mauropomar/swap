@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { PlanetService } from '../../../services/planet';
-import { PlanetModel } from '../../../models/planet';
+import { FilterService } from '../../../services/filter';
 
 @Component({
   selector: 'app-list-planet',
@@ -8,8 +9,18 @@ import { PlanetModel } from '../../../models/planet';
   styleUrls: ['./list-planet.component.css']
 })
 export class ListPlanetComponent implements OnInit {
-  planets: PlanetModel[] = [];
-  constructor(private Planetervice: PlanetService) {}
+  planets = [];
+  isEmpty: boolean = false;
+  public sucription: Subscription;
+
+  constructor(private Planetervice: PlanetService, private filterService: FilterService) {
+    this.sucription = this.filterService.filterSubject.subscribe((text) => {
+      const url = window.location.href.split('/');
+      if (url[3] === 'planets') {
+        this.filter(text);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.getAll();
@@ -21,6 +32,7 @@ export class ListPlanetComponent implements OnInit {
       for(const item of results){
          item.id = this.getId(item.url);
          this.planets.push(item);
+         localStorage.setItem('items', JSON.stringify(this.planets));
       }
     });
   }
@@ -29,5 +41,18 @@ export class ListPlanetComponent implements OnInit {
     const array = url.split('/');
     const id = array[5];
     return id;
+  }
+
+  filter(text: string) {
+    let array: any = localStorage.getItem('items');
+    array = JSON.parse(array);
+    text = text !== '' ? text.toLocaleLowerCase() : '';
+    this.planets = array.filter(
+      (item: any) =>
+        item.name.toLocaleLowerCase().indexOf(text) > -1 ||
+        item.climate.toLocaleLowerCase().indexOf(text) > -1 ||
+        item.gravity.toLocaleLowerCase().indexOf(text) > -1
+    );
+    this.isEmpty = this.planets.length === 0;
   }
 }
