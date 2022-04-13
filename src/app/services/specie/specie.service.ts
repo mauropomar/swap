@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SpecieModel } from '../../models/Specie';
+import { SpecieModel } from '../../models/specie';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,11 +10,11 @@ import { environment } from 'src/environments/environment';
 export class SpecieService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<SpecieModel[]> {
-    return this.http.get<SpecieModel[]>(`${environment.apiUrl}species`);
+  getAll(): Observable<SpecieModel> {
+    return this.http.get<SpecieModel>(`${environment.apiUrl}species`);
   }
 
-  get(id: string): Observable<SpecieModel[]> {
-    return this.http.get<SpecieModel[]>(`${environment.apiUrl}species/${id}`);
+  get(id: string): Observable<SpecieModel> {
+    return this.http.get<SpecieModel>(`${environment.apiUrl}species/${id}`);
   }
 }

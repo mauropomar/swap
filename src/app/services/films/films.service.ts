@@ -12,11 +12,11 @@ export class FilmsService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<FilmsModel[]>{
-    return this.http.get<FilmsModel[]>(`${environment.apiUrl}films`);
+  getAll(): Observable<FilmsModel>{
+    return this.http.get<FilmsModel>(`${environment.apiUrl}films`);
   }
 
-  get(id: string):Observable<FilmsModel[]>{
-    return this.http.get<FilmsModel[]>(`${environment.apiUrl}films/${id}`);
+  get(id: string):Observable<FilmsModel>{
+    return this.http.get<FilmsModel>(`${environment.apiUrl}films/${id}`);
   }
 }
