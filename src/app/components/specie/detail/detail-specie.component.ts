@@ -19,7 +19,7 @@ export class DetailSpecieComponent implements OnInit {
   }
 
   get(id: string): void{
-    this.specieService.get(id).subscribe((data: any) => {
+    this.specieService.get(id).subscribe((data) => {
       this.specie = data;
     });
   }

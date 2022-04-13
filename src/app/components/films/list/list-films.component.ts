@@ -34,7 +34,7 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
   }
 
   getAll(): void {
-    this.filmService.getAll().subscribe((data: any) => {
+    this.filmService.getAll().subscribe((data) => {
       const results = data.results;
       for (const item of results) {
         item.id = this.getId(item.url);

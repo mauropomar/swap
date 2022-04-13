@@ -27,7 +27,7 @@ export class ListPlanetComponent implements OnInit {
   }
 
   getAll() {
-    this.Planetervice.getAll().subscribe((data: any) => {
+    this.Planetervice.getAll().subscribe((data) => {
       const results = data.results;
       for(const item of results){
          item.id = this.getId(item.url);

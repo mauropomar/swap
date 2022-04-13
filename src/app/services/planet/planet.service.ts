@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { PlanetModel } from '../../models/planet';
 import { environment } from 'src/environments/environment';
 
+type GetALPlanetResponse = {
+  results: PlanetModel[]
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +15,8 @@ export class PlanetService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<PlanetModel>{
-    return this.http.get<PlanetModel>(`${environment.apiUrl}planets`);
+  getAll(): Observable<GetALPlanetResponse>{
+    return this.http.get<GetALPlanetResponse>(`${environment.apiUrl}planets`);
   }
 
   get(id: string): Observable<PlanetModel>{

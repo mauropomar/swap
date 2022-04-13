@@ -31,7 +31,7 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
   }
 
   getAll(): void {
-    this.vehicleService.getAll().subscribe((data: any) => {
+    this.vehicleService.getAll().subscribe((data) => {
       const results = data.results;
       for(const item of results){
          item.id = this.getId(item.url);

@@ -19,7 +19,7 @@ export class DetailPlanetComponent implements OnInit {
   }
 
   get(id: string): void{
-    this.planetService.get(id).subscribe((data: any) => {
+    this.planetService.get(id).subscribe((data) => {
       this.planet = data;
     });
   }

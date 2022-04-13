@@ -19,7 +19,7 @@ export class DetailStarshipComponent implements OnInit {
   }
 
   get(id: string): void{
-    this.shipService.get(id).subscribe((data: any) => {
+    this.shipService.get(id).subscribe((data) => {
       this.ship = data;
     });
   }

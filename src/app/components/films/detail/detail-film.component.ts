@@ -19,7 +19,7 @@ export class DetailFilmComponent implements OnInit {
   }
 
   get(id: string): void{
-    this.filmService.get(id).subscribe((data: any) => {
+    this.filmService.get(id).subscribe((data) => {
       this.film = data;
     });
   }

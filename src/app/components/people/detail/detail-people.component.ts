@@ -21,7 +21,7 @@ export class DetailPeopleComponent implements OnInit {
   }
 
   get(id: string): void{
-    this.peopleService.get(id).subscribe((data: any) => {
+    this.peopleService.get(id).subscribe((data) => {
       this.people = data;
     });
   }
