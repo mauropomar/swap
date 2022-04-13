@@ -11,7 +11,6 @@ import { FilmsService } from '../../../services/films';
 export class ListFilmsComponent implements OnInit, OnDestroy {
   films = [];
   isEmpty: boolean = false;
-
   public sucription: Subscription;
 
   constructor(

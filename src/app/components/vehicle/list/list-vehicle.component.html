@@ -2,4 +2,5 @@
   <div *ngFor="let item of vehicles" class="item-card">
     <p>{{item.name}}/{{item.model}}/{{item.manufacturer}} <a [routerLink] = "['/vehicles', item.id]">More Details</a></p>
   </div>
+  <p *ngIf="isEmpty">No existen vehiculos para este criterio de búsqueda</p>
 </div>
