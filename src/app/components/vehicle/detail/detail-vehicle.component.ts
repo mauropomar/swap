@@ -20,7 +20,6 @@ export class DetailVehicleComponent implements OnInit {
 
   get(id: string): void{
     this.vehicleService.get(id).subscribe((data: any) => {
-      debugger
       this.vehicle = data;
     });
   }
