@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { StarShipModel } from '../../models/starShip';
+import { StarShipModel } from '../../models/starship';
 import { environment } from 'src/environments/environment';
 
 type GetALStarShipResponse = {
