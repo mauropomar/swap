@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ToolbarService } from 'src/app/services/toolbar';
 
@@ -7,12 +7,12 @@ import { ToolbarService } from 'src/app/services/toolbar';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
   title = 'Swap';
   showTBar = true;
   public sucription: Subscription;
 
-  constructor(private toolbarService: ToolbarService) {}
+  constructor(private toolbarService: ToolbarService, private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.sucription = this.toolbarService.showTBarSubject.subscribe((val) => {
@@ -22,5 +22,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sucription.unsubscribe();
+  }
+
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
   }
 }

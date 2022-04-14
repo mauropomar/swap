@@ -16,9 +16,7 @@ export class ToolbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-   // localStorage.clear()
     this.filterService.reloadSearch();
-
   }
 
   changeFilter(text: string) {
