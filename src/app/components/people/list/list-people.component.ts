@@ -15,7 +15,9 @@ export class ListPeopleComponent implements OnInit, OnDestroy {
 
   constructor(private peopleService: PeopleService, private filterService: FilterService) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
+      if (this.peoples.length > 0) {
         this.filter(text);
+      }
     });
   }
 
@@ -35,6 +37,10 @@ export class ListPeopleComponent implements OnInit, OnDestroy {
          this.peoples.push(item);
       }
       localStorage.setItem('items', JSON.stringify(this.peoples));
+      const text = this.filterService.getFiltertext();
+      if (text !== '') {
+        this.filter(text);
+      }
     });
   }
 
@@ -61,9 +67,14 @@ export class ListPeopleComponent implements OnInit, OnDestroy {
         text: text,
         route: 'peoples',
       };
-      searchArray.push(obj);
-      localStorage.setItem('search', JSON.stringify(searchArray));
-      this.filterService.reloadSearch();
+      const elements = searchArray.filter(
+        (item) => item.text === obj.text && item.route === obj.route
+      );
+      if (elements.length === 0) {
+        searchArray.push(obj);
+        localStorage.setItem('search', JSON.stringify(searchArray));
+        this.filterService.reloadSearch();
+      }
     }
   }
 

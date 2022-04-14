@@ -15,7 +15,7 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {}
 
   onChange(evt){
-     this.find();
+    this.find();
   }
 
   onClick(){

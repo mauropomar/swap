@@ -18,7 +18,9 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
     private filterService: FilterService
   ) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
+      if (this.films.length > 0) {
         this.filter(text);
+      }
     });
   }
 
@@ -38,6 +40,10 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
         this.films.push(item);
       }
       localStorage.setItem('items', JSON.stringify(this.films));
+      const text = this.filterService.getFiltertext();
+      if (text !== '') {
+        this.filter(text);
+      }
     });
   }
 
@@ -64,9 +70,14 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
         text: text,
         route: 'films',
       };
-      searchArray.push(obj);
-      localStorage.setItem('search', JSON.stringify(searchArray));
-      this.filterService.reloadSearch();
+      const elements = searchArray.filter(
+        (item) => item.text === obj.text && item.route === obj.route
+      );
+      if (elements.length === 0) {
+        searchArray.push(obj);
+        localStorage.setItem('search', JSON.stringify(searchArray));
+        this.filterService.reloadSearch();
+      }
     }
   }
 }

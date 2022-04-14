@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ToolbarService } from 'src/app/services/toolbar';
 import { FilmsService } from '../../../services/films';
 import { FilmsModel } from '../../../models/films';
 
@@ -11,7 +12,8 @@ import { FilmsModel } from '../../../models/films';
 export class DetailFilmComponent implements OnInit {
   film: FilmsModel;
   errorMessage: string;
-  constructor(private filmService: FilmsService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private filmService: FilmsService, private activatedRoute: ActivatedRoute,
+     private router: Router, private toolbarService: ToolbarService) {
     this.errorMessage = '';
   }
 
@@ -23,6 +25,7 @@ export class DetailFilmComponent implements OnInit {
     this.filmService.errorMessage.subscribe(error => {
       this.errorMessage = error
     })
+    this.toolbarService.show(false);
   }
 
   get(id: string): void{

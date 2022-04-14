@@ -26,7 +26,7 @@ export class ButtonSearchComponent implements OnInit, OnDestroy {
     const url = window.location.href.split('/');
     const route = item.route;
     const text = item.text;
-    if (url[3] === route && url.length === 4) {
+    if (url.indexOf(route) > -1) {
       this.sucription.unsubscribe();
       this.filterService.setFilterText(text);
       this.loadSearchButton();
@@ -40,8 +40,12 @@ export class ButtonSearchComponent implements OnInit, OnDestroy {
   loadSearchButton() {
     this.sucription = this.filterService.SearchSubject.subscribe(() => {
       const str = localStorage.getItem('search');
-      const array = str !== null ? JSON.parse(str) : [];
-      this.lastSearch = array.length > 0 ? array.slice(-4) : [];
+      const items = str !== null ? JSON.parse(str) : [];
+      if(items.length > 4){
+        items.splice(0, 1);
+      }
+      this.lastSearch = items;
+      localStorage.setItem('search', JSON.stringify(items));
     });
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterService } from 'src/app/services/filter';
+import { ToolbarService } from 'src/app/services/toolbar';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private filterService: FilterService, private toolbarService: ToolbarService) { }
 
   ngOnInit(): void {
+  }
+
+  onClick(){
+    this.filterService.setFilterText('');
+    this.toolbarService.show(true);
   }
 
 }

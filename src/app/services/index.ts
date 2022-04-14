@@ -5,3 +5,4 @@ export * from './planet';
 export * from './people';
 export * from './vehicle';
 export * from './starship';
+export * from './toolbar';
