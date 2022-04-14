@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ToolbarRoutingModule } from './toolbar-routing.module';
 import { ToolbarComponent } from './toolbar.component';
@@ -11,7 +12,8 @@ import { ButtonSearchComponent } from './search/button-search.component';
   declarations: [ToolbarComponent, FilterComponent, ButtonSearchComponent],
   imports: [
     CommonModule,
-    ToolbarRoutingModule
+    ToolbarRoutingModule,
+    FormsModule
   ],
   exports:[
     ToolbarComponent

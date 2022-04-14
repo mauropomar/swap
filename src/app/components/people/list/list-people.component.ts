@@ -15,10 +15,7 @@ export class ListPeopleComponent implements OnInit, OnDestroy {
 
   constructor(private peopleService: PeopleService, private filterService: FilterService) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
-      const url = window.location.href.split('/');
-      if (url[3] === 'peoples') {
         this.filter(text);
-      }
     });
   }
 

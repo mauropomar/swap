@@ -18,10 +18,7 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
     private filterService: FilterService
   ) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
-      const url = window.location.href.split('/');
-      if (url[3] === 'vehicles') {
         this.filter(text);
-      }
     });
   }
 

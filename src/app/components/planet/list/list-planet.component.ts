@@ -15,10 +15,7 @@ export class ListPlanetComponent implements OnInit {
 
   constructor(private Planetervice: PlanetService, private filterService: FilterService) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
-      const url = window.location.href.split('/');
-      if (url[3] === 'planets') {
         this.filter(text);
-      }
     });
   }
 

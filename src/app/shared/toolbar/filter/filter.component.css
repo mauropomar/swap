@@ -1,0 +1,9 @@
+button.input-group-addon {
+  position: absolute;
+  right: -38px;
+  top: 0;
+  padding: 2px;
+  z-index: 999;
+  height: 34px;
+  width: 38px;
+}

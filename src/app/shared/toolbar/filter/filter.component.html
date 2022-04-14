@@ -1,1 +1,8 @@
-<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (keyup)="onKeyUp($event)">
+<div class="input-group">
+  <input type="text" (change)="onChange($event)" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Search for...">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" (click)="onClick()">
+        <i class="fa fa-search"></i>
+    </button>
+  </span>
+</div>

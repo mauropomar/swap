@@ -16,10 +16,7 @@ export class ListSpecieComponent implements OnInit, OnDestroy {
 
   constructor(private specieService: SpecieService, private filterService: FilterService) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
-      const url = window.location.href.split('/');
-      if (url[3] === 'species') {
         this.filter(text);
-      }
     });
   }
 

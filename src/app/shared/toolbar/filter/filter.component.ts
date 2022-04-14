@@ -7,12 +7,25 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
   @Output() change = new EventEmitter<string>();
+  searchText: string;
+  lastSearch: string;
+
   constructor() {}
 
   ngOnInit(): void {}
 
-  onKeyUp(evt) {
-    const str = evt.currentTarget.value;
-    this.change.emit(str);
+  onChange(evt){
+     this.find();
+  }
+
+  onClick(){
+    this.find();
+  }
+
+  find(){
+    if(this.searchText !== this.lastSearch){
+      this.change.emit(this.searchText);
+      this.lastSearch = this.searchText;
+    }
   }
 }
