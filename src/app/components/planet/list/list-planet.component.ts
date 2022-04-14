@@ -17,6 +17,11 @@ export class ListPlanetComponent implements OnInit {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
       if (this.planets.length > 0) {
         this.filter(text);
+      }else{
+        if(this.isEmpty){
+          this.planets = JSON.parse(localStorage.getItem('items'));
+          this.isEmpty = false
+        }
       }
     });
   }

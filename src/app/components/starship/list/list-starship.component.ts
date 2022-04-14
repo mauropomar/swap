@@ -17,6 +17,11 @@ export class ListStarshipComponent implements OnInit, OnDestroy {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
       if(this.ships.length > 0){
         this.filter(text);
+      }else{
+        if(this.isEmpty){
+          this.ships = JSON.parse(localStorage.getItem('items'));
+          this.isEmpty = false
+        }
       }
     });
   }

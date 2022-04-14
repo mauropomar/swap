@@ -7,17 +7,25 @@ import { SpecieModel } from '../../../models/specie';
 @Component({
   selector: 'app-list-specie',
   templateUrl: './list-specie.component.html',
-  styleUrls: ['./list-specie.component.css']
+  styleUrls: ['./list-specie.component.css'],
 })
 export class ListSpecieComponent implements OnInit, OnDestroy {
   species: SpecieModel[] = [];
   isEmpty: boolean = false;
   public sucription: Subscription;
 
-  constructor(private specieService: SpecieService, private filterService: FilterService) {
+  constructor(
+    private specieService: SpecieService,
+    private filterService: FilterService
+  ) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
-      if(this.species.length > 0){
+      if (this.species.length > 0) {
         this.filter(text);
+      } else {
+        if (this.isEmpty) {
+          this.species = JSON.parse(localStorage.getItem('items'));
+          this.isEmpty = false;
+        }
       }
     });
   }
@@ -33,9 +41,9 @@ export class ListSpecieComponent implements OnInit, OnDestroy {
   getAll(): void {
     this.specieService.getAll().subscribe((data) => {
       const results = data.results;
-      for(const item of results){
-         item.id = this.getId(item.url);
-         this.species.push(item);
+      for (const item of results) {
+        item.id = this.getId(item.url);
+        this.species.push(item);
       }
       localStorage.setItem('items', JSON.stringify(this.species));
       const text = this.filterService.getFiltertext();
@@ -45,7 +53,7 @@ export class ListSpecieComponent implements OnInit, OnDestroy {
     });
   }
 
-  getId(url:string): string{
+  getId(url: string): string {
     const array = url.split('/');
     const id = array[5];
     return id;

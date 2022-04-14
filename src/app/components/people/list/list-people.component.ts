@@ -17,6 +17,11 @@ export class ListPeopleComponent implements OnInit, OnDestroy {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
       if (this.peoples.length > 0) {
         this.filter(text);
+      }else{
+        if(this.isEmpty){
+          this.peoples = JSON.parse(localStorage.getItem('items'));
+          this.isEmpty = false
+        }
       }
     });
   }

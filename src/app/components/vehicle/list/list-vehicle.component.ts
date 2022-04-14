@@ -20,6 +20,11 @@ export class ListVehicleComponent implements OnInit, OnDestroy {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
       if(this.vehicles.length > 0){
         this.filter(text);
+      }else{
+        if(this.isEmpty){
+          this.vehicles = JSON.parse(localStorage.getItem('items'));
+          this.isEmpty = false
+        }
       }
     });
   }

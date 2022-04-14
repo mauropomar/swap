@@ -20,6 +20,11 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
       if (this.films.length > 0) {
         this.filter(text);
+      }else{
+        if(this.isEmpty){
+          this.films = JSON.parse(localStorage.getItem('items'));
+          this.isEmpty = false
+        }
       }
     });
   }
