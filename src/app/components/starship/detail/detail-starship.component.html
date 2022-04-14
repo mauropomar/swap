@@ -1,10 +1,17 @@
-<div class="card">
-  <p><span>Nombre:</span> {{ship.name}}</p>
-  <p><span>Modelo:</span> {{ship.model}}</p>
-  <p><span>Proveedor:</span> {{ship.manufacturer}}</p>
-  <p><span>Tipo de nave:</span> {{ship.starship_class}}</p>
-  <p><span>Pasajeros:</span> {{ship.passengers}}</p>
+<div *ngIf="errorMessage; else starshipDetail">
+  <p>Something went wrong</p>
+  <p>Error: {{ errorMessage }}</p>
 </div>
+
+<ng-template #starshipDetail>
+<div class="card">
+  <p><span>Nombre:</span> {{ship?.name}}</p>
+  <p><span>Modelo:</span> {{ship?.model}}</p>
+  <p><span>Proveedor:</span> {{ship?.manufacturer}}</p>
+  <p><span>Tipo de nave:</span> {{ship?.starship_class}}</p>
+  <p><span>Pasajeros:</span> {{ship?.passengers}}</p>
+</div>
+</ng-template>
 <div class="btn-back">
   <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
 </div>

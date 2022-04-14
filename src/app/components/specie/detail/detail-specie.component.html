@@ -1,11 +1,18 @@
-<div class="card">
-  <p><span>Nombre:</span> {{specie.name}}</p>
-  <p><span>Clasificación:</span> {{specie.classification}}</p>
-  <p><span>Designación:</span> {{specie.designation}}</p>
-  <p><span>Promedio Altura:</span> {{specie.average_height}}</p>
-  <p><span>Esperanza de vida:</span> {{specie.average_lifespan}}</p>
-  <p><span>Lenguaje:</span> {{specie.language}}</p>
+<div *ngIf="errorMessage; else specieDetail">
+  <p>Something went wrong</p>
+  <p>Error: {{ errorMessage }}</p>
 </div>
+
+<ng-template #specieDetail>
+  <div class="card">
+    <p><span>Nombre:</span> {{ specie?.name }}</p>
+    <p><span>Clasificación:</span> {{ specie?.classification }}</p>
+    <p><span>Designación:</span> {{ specie?.designation }}</p>
+    <p><span>Promedio Altura:</span> {{ specie?.average_height }}</p>
+    <p><span>Esperanza de vida:</span> {{ specie?.average_lifespan }}</p>
+    <p><span>Lenguaje:</span> {{ specie?.language }}</p>
+  </div>
+</ng-template>
 <div class="btn-back">
   <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
 </div>

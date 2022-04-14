@@ -10,11 +10,18 @@ import { StarShipModel } from '../../../models/starship';
 })
 export class DetailStarshipComponent implements OnInit {
   ship: StarShipModel;
-  constructor(private shipService: StarShipService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  errorMessage: string;
+
+  constructor(private shipService: StarShipService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.errorMessage = '';
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.get(params.id);
+    })
+    this.shipService.errorMessage.subscribe(error => {
+      this.errorMessage = error
     })
   }
 

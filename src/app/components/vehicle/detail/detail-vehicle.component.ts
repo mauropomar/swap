@@ -10,11 +10,18 @@ import { VehicleModel } from '../../../models/vehicle';
 })
 export class DetailVehicleComponent implements OnInit {
   vehicle: VehicleModel;
-  constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  errorMessage: string;
+
+  constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.errorMessage = '';
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.get(params.id);
+    })
+    this.vehicleService.errorMessage.subscribe(error => {
+      this.errorMessage = error
     })
   }
 

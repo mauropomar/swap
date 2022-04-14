@@ -10,11 +10,18 @@ import { SpecieModel } from '../../../models/specie';
 })
 export class DetailSpecieComponent implements OnInit {
   specie: SpecieModel;
-  constructor(private specieService: SpecieService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  errorMessage: string;
+
+  constructor(private specieService: SpecieService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.errorMessage = '';
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.get(params.id);
+    })
+    this.specieService.errorMessage.subscribe(error => {
+      this.errorMessage = error
     })
   }
 
