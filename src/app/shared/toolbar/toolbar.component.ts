@@ -1,33 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FilterService } from './../../services/filter';
-import { ToolbarService } from 'src/app/services/toolbar';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
 })
-export class ToolbarComponent implements OnInit, OnDestroy {
-  public sucription: Subscription;
+export class ToolbarComponent implements OnInit {
+
   lastSearch = [];
-  showTBar: boolean;
+  showTBar: boolean = true;
 
   constructor(
-    private filterService: FilterService,
-    private toolbarService: ToolbarService
+    private filterService: FilterService
   ) {}
 
   ngOnInit(): void {
-    // localStorage.clear();
     this.filterService.reloadSearch();
-    this.sucription = this.toolbarService.showTBarSubject.subscribe((val) => {
-      this.showTBar = val;
-    });
-  }
-
-  ngOnDestroy() {
-    this.sucription.unsubscribe();
 
   }
 

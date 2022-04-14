@@ -37,6 +37,7 @@ export class DetailPeopleComponent implements OnInit {
 
   goBack(): void{
     this.router.navigate(['peoples']);
+    this.toolbarService.show(true);
   }
 
 }

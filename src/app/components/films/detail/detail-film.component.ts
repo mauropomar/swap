@@ -36,6 +36,7 @@ export class DetailFilmComponent implements OnInit {
 
   goBack(): void{
     this.router.navigate(['films']);
+    this.toolbarService.show(true);
   }
 
 }

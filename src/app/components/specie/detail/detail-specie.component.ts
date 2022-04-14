@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { SpecieService } from '../../../services/specie';
 import { SpecieModel } from '../../../models/specie';
+import { ToolbarService } from 'src/app/services/toolbar';
+
 
 @Component({
   selector: 'app-detail-specie',
@@ -12,7 +14,8 @@ export class DetailSpecieComponent implements OnInit {
   specie: SpecieModel;
   errorMessage: string;
 
-  constructor(private specieService: SpecieService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private specieService: SpecieService, private activatedRoute: ActivatedRoute,
+     private router: Router,  private toolbarService: ToolbarService) {
     this.errorMessage = '';
   }
 
@@ -23,6 +26,7 @@ export class DetailSpecieComponent implements OnInit {
     this.specieService.errorMessage.subscribe(error => {
       this.errorMessage = error
     })
+    this.toolbarService.show(false);
   }
 
   get(id: string): void{
@@ -33,5 +37,6 @@ export class DetailSpecieComponent implements OnInit {
 
   goBack(): void{
     this.router.navigate(['species']);
+    this.toolbarService.show(true);
   }
 }

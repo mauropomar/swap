@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ToolbarService } from 'src/app/services/toolbar';
 import { StarShipService } from '../../../services/starship';
 import { StarShipModel } from '../../../models/starship';
 
@@ -12,7 +13,8 @@ export class DetailStarshipComponent implements OnInit {
   ship: StarShipModel;
   errorMessage: string;
 
-  constructor(private shipService: StarShipService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private shipService: StarShipService, private activatedRoute: ActivatedRoute,
+    private router: Router, private toolbarService: ToolbarService) {
     this.errorMessage = '';
   }
 
@@ -23,6 +25,7 @@ export class DetailStarshipComponent implements OnInit {
     this.shipService.errorMessage.subscribe(error => {
       this.errorMessage = error
     })
+    this.toolbarService.show(false);
   }
 
   get(id: string): void{
@@ -33,5 +36,6 @@ export class DetailStarshipComponent implements OnInit {
 
   goBack(): void{
     this.router.navigate(['starships']);
+    this.toolbarService.show(true);
   }
 }

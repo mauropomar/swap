@@ -15,7 +15,9 @@ export class ListStarshipComponent implements OnInit, OnDestroy {
 
   constructor(private shipService: StarShipService,  private filterService: FilterService) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
+      if(this.ships.length > 0){
         this.filter(text);
+      }
     });
   }
 
@@ -33,7 +35,11 @@ export class ListStarshipComponent implements OnInit, OnDestroy {
       for(const item of results){
          item.id = this.getId(item.url);
          this.ships.push(item);
-         localStorage.setItem('items', JSON.stringify(this.ships));
+      }
+      localStorage.setItem('items', JSON.stringify(this.ships));
+      const text = this.filterService.getFiltertext();
+      if (text !== '') {
+        this.filter(text);
       }
     });
   }
@@ -63,9 +69,14 @@ export class ListStarshipComponent implements OnInit, OnDestroy {
         text: text,
         route: 'starships',
       };
-      searchArray.push(obj);
-      localStorage.setItem('search', JSON.stringify(searchArray));
-      this.filterService.reloadSearch();
+      const elements = searchArray.filter(
+        (item) => item.text === obj.text && item.route === obj.route
+      );
+      if (elements.length === 0) {
+        searchArray.push(obj);
+        localStorage.setItem('search', JSON.stringify(searchArray));
+        this.filterService.reloadSearch();
+      }
     }
   }
 }

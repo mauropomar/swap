@@ -16,7 +16,9 @@ export class ListSpecieComponent implements OnInit, OnDestroy {
 
   constructor(private specieService: SpecieService, private filterService: FilterService) {
     this.sucription = this.filterService.filterSubject.subscribe((text) => {
+      if(this.species.length > 0){
         this.filter(text);
+      }
     });
   }
 
@@ -36,6 +38,10 @@ export class ListSpecieComponent implements OnInit, OnDestroy {
          this.species.push(item);
       }
       localStorage.setItem('items', JSON.stringify(this.species));
+      const text = this.filterService.getFiltertext();
+      if (text !== '') {
+        this.filter(text);
+      }
     });
   }
 
@@ -64,9 +70,14 @@ export class ListSpecieComponent implements OnInit, OnDestroy {
         text: text,
         route: 'species',
       };
-      searchArray.push(obj);
-      localStorage.setItem('search', JSON.stringify(searchArray));
-      this.filterService.reloadSearch();
+      const elements = searchArray.filter(
+        (item) => item.text === obj.text && item.route === obj.route
+      );
+      if (elements.length === 0) {
+        searchArray.push(obj);
+        localStorage.setItem('search', JSON.stringify(searchArray));
+        this.filterService.reloadSearch();
+      }
     }
   }
 }

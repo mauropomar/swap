@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ToolbarService } from 'src/app/services/toolbar';
 import { PlanetService } from '../../../services/planet';
 import { PlanetModel } from '../../../models/planet';
 
@@ -12,7 +13,8 @@ export class DetailPlanetComponent implements OnInit {
   planet: PlanetModel;
   errorMessage: string;
 
-  constructor(private planetService: PlanetService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private planetService: PlanetService, private activatedRoute: ActivatedRoute,
+    private router: Router, private toolbarService: ToolbarService) {
     this.errorMessage = '';
   }
 
@@ -23,6 +25,7 @@ export class DetailPlanetComponent implements OnInit {
     this.planetService.errorMessage.subscribe(error => {
       this.errorMessage = error
     })
+    this.toolbarService.show(false);
   }
 
   get(id: string): void{
@@ -33,5 +36,6 @@ export class DetailPlanetComponent implements OnInit {
 
   goBack(): void{
     this.router.navigate(['planets']);
+    this.toolbarService.show(true);
   }
 }
