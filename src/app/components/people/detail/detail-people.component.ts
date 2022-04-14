@@ -10,13 +10,19 @@ import { PeopleModel } from '../../../models/people';
 })
 export class DetailPeopleComponent implements OnInit {
   people: PeopleModel;
+  errorMessage: string;
 
-  constructor(private peopleService: PeopleService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private peopleService: PeopleService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.errorMessage = '';
+  }
 
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.get(params.id);
+    })
+    this.peopleService.errorMessage.subscribe(error => {
+      this.errorMessage = error
     })
   }
 

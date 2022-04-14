@@ -1,10 +1,17 @@
-<div class="card">
-  <p><span>Nombre:</span> {{people.name}}</p>
-  <p><span>Altura:</span> {{people.height}}</p>
-  <p><span>Sexo:</span> {{people.gender}}</p>
-  <p><span>Año de nacimiento:</span> {{people.birth_year}}</p>
-  <p><span>Color de ojos:</span> {{people.eye_color}}</p>
+<div *ngIf="errorMessage; else peopleDetail">
+  <p>Something went wrong</p>
+  <p>Error: {{ errorMessage }}</p>
 </div>
+
+<ng-template #peopleDetail>
+  <div class="card">
+    <p><span>Nombre:</span> {{ people?.name }}</p>
+    <p><span>Altura:</span> {{ people?.height }}</p>
+    <p><span>Sexo:</span> {{ people?.gender }}</p>
+    <p><span>Año de nacimiento:</span> {{ people?.birth_year }}</p>
+    <p><span>Color de ojos:</span> {{ people?.eye_color }}</p>
+  </div>
+</ng-template>
 <div class="btn-back">
   <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
 </div>

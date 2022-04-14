@@ -1,10 +1,18 @@
-<div class="card">
-  <p><span>Title:</span> {{film.title}}</p>
-  <p><span>Episode_id:</span> {{film.episode_id}}</p>
-  <p><span>Opening_crown:</span> {{film.opening_crawl}}</p>
-  <p><span>Director:</span> {{film.director}}</p>
-  <p><span>Producer:</span> {{film.producer}}</p>
+<div *ngIf="errorMessage; else filmDetail">
+  <p>Something went wrong</p>
+  <p>Error: {{errorMessage}}</p>
 </div>
+
+<ng-template #filmDetail>
+  <div class="card">
+    <p><span>Title:</span> {{film?.title}}</p>
+    <p><span>Episode_id:</span> {{film?.episode_id}}</p>
+    <p><span>Opening_crown:</span> {{film?.opening_crawl}}</p>
+    <p><span>Director:</span> {{film?.director}}</p>
+    <p><span>Producer:</span> {{film?.producer}}</p>
+  </div>
+</ng-template>
+
 <div class="btn-back">
   <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
 </div>

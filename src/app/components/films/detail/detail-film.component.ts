@@ -10,11 +10,18 @@ import { FilmsModel } from '../../../models/films';
 })
 export class DetailFilmComponent implements OnInit {
   film: FilmsModel;
-  constructor(private filmService: FilmsService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  errorMessage: string;
+  constructor(private filmService: FilmsService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.errorMessage = '';
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.get(params.id);
+    })
+
+    this.filmService.errorMessage.subscribe(error => {
+      this.errorMessage = error
     })
   }
 

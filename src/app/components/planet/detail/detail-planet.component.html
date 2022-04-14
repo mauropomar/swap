@@ -1,10 +1,17 @@
-<div class="card">
-  <p><span>Nombre:</span> {{planet.name}}</p>
-  <p><span>Clima:</span> {{planet.climate}}</p>
-  <p><span>Gravedad:</span> {{planet.gravity}}</p>
-  <p><span>Terreno:</span> {{planet.terrain}}</p>
-  <p><span>Población:</span> {{planet.population}}</p>
+<div *ngIf="errorMessage; else planetDetail">
+  <p>Something went wrong</p>
+  <p>Error: {{ errorMessage }}</p>
 </div>
+
+<ng-template #planetDetail>
+  <div class="card">
+    <p><span>Nombre:</span> {{ planet?.name }}</p>
+    <p><span>Clima:</span> {{ planet?.climate }}</p>
+    <p><span>Gravedad:</span> {{ planet?.gravity }}</p>
+    <p><span>Terreno:</span> {{ planet?.terrain }}</p>
+    <p><span>Población:</span> {{ planet?.population }}</p>
+  </div>
+</ng-template>
 <div class="btn-back">
   <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
 </div>

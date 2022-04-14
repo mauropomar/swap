@@ -10,11 +10,18 @@ import { PlanetModel } from '../../../models/planet';
 })
 export class DetailPlanetComponent implements OnInit {
   planet: PlanetModel;
-  constructor(private planetService: PlanetService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  errorMessage: string;
+
+  constructor(private planetService: PlanetService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.errorMessage = '';
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.get(params.id);
+    })
+    this.planetService.errorMessage.subscribe(error => {
+      this.errorMessage = error
     })
   }
 
